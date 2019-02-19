@@ -23,7 +23,7 @@ oc adm policy add-scc-to-user anyuid -z istio-galley-service-account -n istio-sy
 oc adm policy add-scc-to-user privileged -z default -n bookinfo
 
 oc apply -f install/kubernetes/helm/istio/templates/crds.yaml
-oc apply -f install/kubernetes/istio-demo-auth.yaml
+oc apply -f install/kubernetes/istio-demo.yaml
 
 oc expose service prometheus -n istio-system
 oc expose service grafana -n istio-system
