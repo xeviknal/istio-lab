@@ -1,4 +1,4 @@
-istio-*
+istio-[0-9]*
 cluster-lab
 istio-tutorial
 istiooc
