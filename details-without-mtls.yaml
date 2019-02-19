@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: details-plain
+spec:
+  host: details
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "details"
+spec:
+  targets:
+  - name: details
