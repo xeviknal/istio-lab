@@ -2,3 +2,7 @@ istio-[0-9]*
 cluster-lab
 istio-tutorial
 istiooc
+demo-mesh-arena
+mesh-microprofile-2018
+nodejs-metrics-example
+
