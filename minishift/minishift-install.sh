@@ -13,5 +13,5 @@ minishift addon disable anyuid
 minishift start
 minishift ssh -- sudo setenforce 0
 
-sleep 10
+sleep 20
 minishift addon apply anyuid
