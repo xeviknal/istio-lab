@@ -7,3 +7,4 @@ sudo virsh undefine kiali
 echo 'Removing .minishift folder'
 minishift delete --force --clear-cache
 rm -rf ~/.minishift
+rm -rf ~/.kube
