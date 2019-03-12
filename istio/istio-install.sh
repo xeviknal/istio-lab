@@ -24,7 +24,7 @@ oc adm policy add-scc-to-user anyuid -z istio-security-post-install-account -n i
 oc adm policy add-scc-to-user privileged -z default -n bookinfo
 
 for i in install/kubernetes/helm/istio-init/files/crd*yaml; do oc apply -f $i; done
-oc apply -f install/kubernetes/istio-demo-auth.yaml
+oc apply -f install/kubernetes/istio-demo.yaml
 
 oc expose service prometheus -n istio-system
 oc expose service grafana -n istio-system
