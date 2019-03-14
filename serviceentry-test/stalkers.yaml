@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: google-stalker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: google-stalker
+        version: v1
+    spec:
+      containers:
+      - name: users
+        image: xeviknal/serviceentries-test:dev
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9080
+        env:
+        - name: STALKING_WHO
+          value: "https://www.google.com"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: facebook-stalker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: facebook-stalker
+        version: v1
+    spec:
+      containers:
+      - name: users
+        image: xeviknal/serviceentries-test:dev
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9080
+        env:
+        - name: STALKING_WHO
+          value: "www.facebook.com"
