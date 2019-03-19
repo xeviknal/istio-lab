@@ -2,7 +2,7 @@ apiVersion: "rbac.istio.io/v1alpha1"
 kind: ServiceRole
 metadata:
   name: service-admin
-  namespace: default
+  namespace: bookinfo
 spec:
   rules:
   - services: ["*"]
