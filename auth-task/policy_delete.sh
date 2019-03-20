@@ -3,13 +3,13 @@
 echo 'Install Basic Authentication Policy sample - https://istio.io/docs/tasks/security/authn-policy'
 
 echo 'Deleting foo...'
-oc delete -f <(istioctl kube-inject -f samples/httpbin/httpbin.yaml) -n foo
-oc delete -f <(istioctl kube-inject -f samples/sleep/sleep.yaml) -n foo
+oc delete -f <(./bin/istioctl kube-inject -f samples/httpbin/httpbin.yaml) -n foo
+oc delete -f <(./bin/istioctl kube-inject -f samples/sleep/sleep.yaml) -n foo
 oc delete ns foo
 
 echo 'Deleting bar...'
-oc delete -f <(istioctl kube-inject -f samples/httpbin/httpbin.yaml) -n bar
-oc delete -f <(istioctl kube-inject -f samples/sleep/sleep.yaml) -n bar
+oc delete -f <(./bin/istioctl kube-inject -f samples/httpbin/httpbin.yaml) -n bar
+oc delete -f <(./bin/istioctl kube-inject -f samples/sleep/sleep.yaml) -n bar
 oc delete ns bar
 
 echo 'Deleting legacy...'
