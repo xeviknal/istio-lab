@@ -1,0 +1,10 @@
+# Invalid: there isn't any Destination Rule enabling services start mTLS connection
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "default"
+  namespace: "bookinfo"
+spec:
+  peers:
+  - mtls:
+      mode: STRICT
