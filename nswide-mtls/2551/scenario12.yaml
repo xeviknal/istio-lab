@@ -1,4 +1,4 @@
-# Valid: STRICT mode allow only mTLS connections to services to the whole mesh
+# Valid: PERMISSIVE mode allow mTLS connections to services to the whole mesh
 apiVersion: "networking.istio.io/v1alpha3"
 kind: "DestinationRule"
 metadata:
@@ -17,4 +17,4 @@ metadata:
 spec:
   peers:
   - mtls:
-      mode: STRICT
+      mode: PERMISSIVE
