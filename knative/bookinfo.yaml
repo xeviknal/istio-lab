@@ -1,0 +1,89 @@
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: details
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: istio/examples-bookinfo-details-v1:1.8.0
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 9080
+---
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: ratings
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: istio/examples-bookinfo-ratings-v1:1.8.0
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 9080
+---
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: reviews-v1
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: istio/examples-bookinfo-reviews-v1:1.8.0
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 9080
+---
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: reviews-v2
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: istio/examples-bookinfo-reviews-v2:1.8.0
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 9080
+---
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: reviews-v3
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: istio/examples-bookinfo-reviews-v3:1.8.0
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 9080
+---
+apiVersion: serving.knative.dev/v1alpha1 # Current version of Knative
+kind: Service
+metadata:
+  name: productpage
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: istio/examples-bookinfo-productpage-v1:1.8.0
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 9080
