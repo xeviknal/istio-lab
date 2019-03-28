@@ -1,5 +1,5 @@
 #!/bin/bash
 
 ./install-minishift.sh
-./install-istio.sh
+./custom-install-istio.sh
 ./install-serving.sh

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 oc project myproject
+oc label namespace myproject istio-injection=enabled
 oc apply -f hello-world.yaml
 
 while oc get pods | grep -v -E "(Running|Completed|STATUS)"; do sleep 5; done
