@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Route
+metadata:
+  name: helloworld-default
+spec:
+  traffic:
+    - revisionName: helloworld-go-g69zs
+      percent: 75
+    - revisionName: helloworld-go-5vk5j
+      percent: 25
