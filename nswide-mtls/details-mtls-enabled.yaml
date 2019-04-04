@@ -1,0 +1,18 @@
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "details-enable-mtls"
+spec:
+  host: details
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "default"
+spec:
+  peers:
+  - mtls:
+      mode: STRICT
