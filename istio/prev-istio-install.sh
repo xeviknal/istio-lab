@@ -27,7 +27,3 @@ oc apply -f install/kubernetes/istio-demo.yaml
 
 oc expose service prometheus -n istio-system
 oc expose service grafana -n istio-system
-
-oc new-project bookinfo
-oc apply -f <(./bin/istioctl kube-inject -f samples/bookinfo/platform/kube/bookinfo.yaml) -n bookinfo
-./bin/istioctl kube-inject -f ~/code/kiali-commit-conf/step_1_1/generators.yaml | oc apply -n bookinfo -f -
