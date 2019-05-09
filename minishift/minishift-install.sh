@@ -1,7 +1,7 @@
 #!/bin/bash
 
 minishift profile set kiali
-minishift config set memory 12GB
+minishift config set memory 14GB
 minishift config set cpus 3
 minishift config set vm-driver kvm
 minishift config set image-caching true

@@ -1,0 +1,5 @@
+Manually transit to ns-wide mtls. 
+
+Explain what PERMISSIVE mode is. 
+Show what happens when you change that to STRICT (validations + visualization). 
+Change host field to *.bookinfo.svc.cluster.local to achieve ns-wide mtls.
