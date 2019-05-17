@@ -1,19 +1,21 @@
 apiVersion: "rbac.istio.io/v1alpha1"
 kind: ServiceRole
 metadata:
-  name: productpage-viewer
+  name: ratings-viewer
+  namespace: bookinfo
 spec:
   rules:
-  - services: ["productpage.bookinfo.svc.cluster.local"]
+  - services: ["ratings.bookinfo.svc.cluster.local"]
     methods: ["GET"]
 ---
 apiVersion: "rbac.istio.io/v1alpha1"
 kind: ServiceRoleBinding
 metadata:
-  name: bind-productpage-viewer
+  name: bind-ratings
+  namespace: bookinfo
 spec:
   subjects:
-  - user: "*"
+  - user: "cluster.local/ns/bookinfo/sa/bookinfo-reviews"
   roleRef:
     kind: ServiceRole
-    name: "productpage-viewer"
+    name: "ratings-viewer"
