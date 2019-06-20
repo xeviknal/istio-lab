@@ -12,6 +12,7 @@ minishift addon disable anyuid
 
 minishift start --show-libmachine-logs -v5
 minishift ssh -- sudo setenforce 0
+minishift ssh -- sudo sysctl -w vm.max_map_count=262144
 
 sleep 20
 minishift addon apply anyuid
