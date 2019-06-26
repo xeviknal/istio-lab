@@ -8,3 +8,4 @@ nodejs-metrics-example
 istio-vet
 knative-tutorial
 istio-operator
+registry-puller
