@@ -22,6 +22,9 @@ oc adm policy add-scc-to-user anyuid -z istio-galley-service-account -n istio-sy
 oc adm policy add-scc-to-user anyuid -z istio-security-post-install-account -n istio-system
 
 oc adm policy add-scc-to-user privileged -z default -n bookinfo
+oc adm policy add-scc-to-user privileged -z default -n travel-agency
+oc adm policy add-scc-to-user privileged -z default -n travel-portal
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:istio-system:kiali-service-account
 
 for i in install/kubernetes/helm/istio-init/files/crd*yaml; do oc apply -f $i; done
 oc apply -f install/kubernetes/istio-demo.yaml
