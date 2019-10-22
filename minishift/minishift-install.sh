@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Copying oc v3.11 to cache
+cp -r /opt/kiali/minishift-cache/cache ~/.minishift/cache
+
 minishift profile set kiali
-minishift config set memory 14GB
+minishift config set memory 16GB
 minishift config set cpus 3
 minishift config set vm-driver kvm
 minishift config set image-caching true
