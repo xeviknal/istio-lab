@@ -1,0 +1,18 @@
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "discounts-enable-mtls"
+spec:
+  host: discounts
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "default"
+spec:
+  peers:
+  - mtls:
+      mode: PERMISSIVE
