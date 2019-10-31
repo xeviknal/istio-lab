@@ -1,0 +1,12 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRoleBinding
+metadata:
+  name: travel-binding
+  namespace: travel-portal
+spec:
+  subjects:
+  - user: "cluster.local/ns/travel-portal/sa/portal-serviceaccount"
+  roleRef:
+    kind: ServiceRole
+    name: "travel-viewer"
+

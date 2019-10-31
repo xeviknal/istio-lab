@@ -1,0 +1,10 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRole
+metadata:
+  name: travel-viewer
+  namespace: travel-portal
+spec:
+  rules:
+  - services: ["travel.travel-agency.svc.cluster.local"]
+    methods: ["GET"]
+
