@@ -1,0 +1,10 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRole
+metadata:
+  name: facebook-viewer
+  namespace: stalker
+spec:
+  rules:
+  - services: ["facebook.stalker.svc.cluster.local"]
+    methods: ["GET"]
+

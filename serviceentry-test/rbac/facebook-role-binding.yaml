@@ -1,0 +1,12 @@
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: ServiceRoleBinding
+metadata:
+  name: facebook-binding
+  namespace: stalker
+spec:
+  subjects:
+  - user: "facebook-serviceaccount"
+  roleRef:
+    kind: ServiceRole
+    name: "facebook-viewer"
+

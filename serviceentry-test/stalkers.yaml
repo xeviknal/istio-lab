@@ -1,8 +1,19 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: google-stalker-sa
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: facebook-stalker-sa
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: google-stalker
 spec:
+  serviceAccountName: google-stalker-sa
   replicas: 1
   template:
     metadata:
@@ -27,6 +38,7 @@ kind: Deployment
 metadata:
   name: facebook-stalker
 spec:
+  serviceAccountName: facebook-stalker-sa
   replicas: 1
   template:
     metadata:
