@@ -1,0 +1,209 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rome-portal-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rome-portal
+      version: web
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: rome-portal
+        version: web
+    spec:
+      containers:
+        - name: rome-portal-web
+          image: lucasponce/travel_portal:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: false
+          env:
+            - name: CURRENT_PORTAL
+              value: "rome-portal-web"
+            - name: TRAVELS_SERVICE
+              value: "http://travels.travel-agency:8000"
+            - name: CITY_PORTAL
+              value: "rome"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rome-portal-vip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rome-portal
+      version: vip
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: rome-portal
+        version: vip
+    spec:
+      containers:
+        - name: rome-portal-vip
+          image: lucasponce/travel_portal:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: false
+          env:
+            - name: CURRENT_PORTAL
+              value: "rome-portal-vip"
+            - name: TRAVELS_SERVICE
+              value: "http://travels.travel-agency:8000"
+            - name: CITY_PORTAL
+              value: "rome"
+            - name: USER_TYPE
+              value: "vip"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paris-portal-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paris-portal
+      version: web
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: paris-portal
+        version: web
+    spec:
+      containers:
+        - name: paris-portal-web
+          image: lucasponce/travel_portal:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: false
+          env:
+            - name: CURRENT_PORTAL
+              value: "paris-portal-web"
+            - name: TRAVELS_SERVICE
+              value: "http://travels.travel-agency:8000"
+            - name: CITY_PORTAL
+              value: "paris"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paris-portal-vip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paris-portal
+      version: vip
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: paris-portal
+        version: vip
+    spec:
+      containers:
+        - name: paris-portal-vip
+          image: lucasponce/travel_portal:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: false
+          env:
+            - name: CURRENT_PORTAL
+              value: "paris-portal-vip"
+            - name: TRAVELS_SERVICE
+              value: "http://travels.travel-agency:8000"
+            - name: CITY_PORTAL
+              value: "paris"
+            - name: USER_TYPE
+              value: "vip"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: london-portal-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: london-portal
+      version: web
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: london-portal
+        version: web
+    spec:
+      containers:
+        - name: london-portal-web
+          image: lucasponce/travel_portal:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: false
+          env:
+            - name: CURRENT_PORTAL
+              value: "london-portal-web"
+            - name: TRAVELS_SERVICE
+              value: "http://travels.travel-agency:8000"
+            - name: CITY_PORTAL
+              value: "london"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: london-portal-vip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: london-portal
+      version: vip
+  template:
+    metadata:
+      annotations:
+        readiness.status.sidecar.istio.io/applicationPorts: ""
+      labels:
+        app: london-portal
+        version: vip
+    spec:
+      containers:
+        - name: london-portal-vip
+          image: lucasponce/travel_portal:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          securityContext:
+            privileged: false
+          env:
+            - name: CURRENT_PORTAL
+              value: "london-portal-vip"
+            - name: TRAVELS_SERVICE
+              value: "http://travels.travel-agency:8000"
+            - name: CITY_PORTAL
+              value: "london"
+            - name: USER_TYPE
+              value: "vip"
