@@ -11,4 +11,4 @@ istioctl manifest apply --set profile=demo
 sleep 10
 echo 'tracing: in_cluster_url: "http://jaeger-query.istio-system.svc:16686"'
 sleep 10
-oc edit kiali kiali -n kiali-operator
+oc edit configmap kiali -n istio-system

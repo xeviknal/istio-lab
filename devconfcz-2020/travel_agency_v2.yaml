@@ -4,6 +4,10 @@ metadata:
   name: discounts-v2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: discounts
+      version: v2
   template:
     metadata:
       annotations:
@@ -36,6 +40,10 @@ metadata:
   name: flights-v2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: flights
+      version: v2
   template:
     metadata:
       annotations:
@@ -70,6 +78,10 @@ metadata:
   name: hotels-v2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: hotels
+      version: v2
   template:
     metadata:
       annotations:
@@ -104,6 +116,10 @@ metadata:
   name: cars-v2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: cars
+      version: v2
   template:
     metadata:
       annotations:
@@ -138,6 +154,10 @@ metadata:
   name: insurances-v2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: insurances
+      version: v2
   template:
     metadata:
       annotations:
@@ -172,6 +192,10 @@ metadata:
   name: travels-v2
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: travels
+      version: v2
   template:
     metadata:
       annotations:
