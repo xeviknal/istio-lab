@@ -1,5 +1,6 @@
 #!/bin/bash
 
+eval $(minishift docker-env) && eval $(minishift oc-env)
 oc login -u admin -p admin
 
 echo 'Deleting bookinfo...'
