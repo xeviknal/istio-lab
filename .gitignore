@@ -9,3 +9,7 @@ istio-vet
 knative-tutorial
 registry-puller
 istio-images-centos
+kiali-commit-conf
+travel-comparison-demo
+istio-api
+istio.io
