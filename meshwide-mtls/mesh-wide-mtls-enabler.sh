@@ -1,4 +1,4 @@
-cat <<EOF | oc apply -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: "authentication.istio.io/v1alpha1"
 kind: "MeshPolicy"
 metadata:
@@ -8,7 +8,7 @@ spec:
   - mtls: {}
 EOF
 
-cat <<EOF | oc apply -f -
+cat <<EOF | kubectl apply -f -
 apiVersion: "networking.istio.io/v1alpha3"
 kind: "DestinationRule"
 metadata:
