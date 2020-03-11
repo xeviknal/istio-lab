@@ -1,0 +1,27 @@
+kind: Sidecar
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: worst-cases
+spec:
+  workloadSelector:
+    labels:
+      app: productpage
+  egress:
+    - bind: 127.0.0.1
+      hosts:
+        - default/reviews.other.svc.cluster.local
+        - default/*.other.svc.cluster.local
+        - other/*
+        - other/sv1.other.svc.cluster.local
+        - other/*.other.svc.cluster.local
+        - other/*.default.svc.cluster.local
+        - '*/*'
+        - ./*
+        - ~/*
+        - default/www.google.com
+        - default/reviews.default.svc.cluster.local
+      port:
+        name: https
+        number: 8443
+        protocol: HTTP2
+
