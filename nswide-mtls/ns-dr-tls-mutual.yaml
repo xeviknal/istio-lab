@@ -3,7 +3,7 @@ kind: "DestinationRule"
 metadata:
   name: "enable-mtls"
 spec:
-  host: "*.bookinfo.svc.cluster.local"
+  host: "*.default.svc.cluster.local"
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
