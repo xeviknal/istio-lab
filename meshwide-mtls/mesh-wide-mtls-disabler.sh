@@ -1,22 +1,4 @@
-cat <<EOF | oc delete -f -
-apiVersion: "authentication.istio.io/v1alpha1"
-kind: "MeshPolicy"
-metadata:
-  name: "default"
-spec:
-  peers:
-  - mtls: {}
-EOF
+#!/bin/sh
 
-cat <<EOF | oc delete -f -
-apiVersion: "networking.istio.io/v1alpha3"
-kind: "DestinationRule"
-metadata:
-  name: "default"
-  namespace: "istio-system"
-spec:
-  host: "*.local"
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
-EOF
+kubectl delete -f meshpolicy-right.yaml
+kubectl delete -f dr-right.yaml

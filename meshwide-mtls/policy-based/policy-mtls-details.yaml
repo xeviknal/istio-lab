@@ -1,0 +1,9 @@
+apiVersion: authentication.istio.io/v1alpha1
+kind: Policy
+metadata:
+    name: details
+spec:
+  targets:
+  - name: details
+  peers:
+  - mtls: {}

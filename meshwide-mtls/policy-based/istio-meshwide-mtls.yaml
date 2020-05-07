@@ -1,11 +1,11 @@
 ##########
 # This enables mTLS for the whole istio installation.
-# The PeerAuthentication allows all the services to receive traffic in mTLS mode.
+# The MeshPolicy allows all the services to receive traffic in mTLS mode.
 # The DestinationRule allows all the entities to start communications in mTLS mode.
 ##########
 ---
-apiVersion: "security.istio.io/v1beta1"
-kind: "PeerAuthentication"
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "MeshPolicy"
 metadata:
   name: "default"
 spec:

@@ -1,9 +1,11 @@
-apiVersion: authentication.istio.io/v1alpha1
-kind: Policy
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
 metadata:
-    name: details
+  name: details
+  namespace: bookinfo
 spec:
-  targets:
-  - name: details
-  peers:
-  - mtls: {}
+  selector:
+    matchLabels:
+      app: details
+  mtls:
+    mode: STRICT
