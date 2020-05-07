@@ -8,10 +8,11 @@ spec:
     tls:
       mode: ISTIO_MUTUAL
 ---
-apiVersion: "security.istio.io/v1beta1"
-kind: "PeerAuthentication"
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
 metadata:
   name: "default"
 spec:
-  mtls:
-    mode: PERMISSIVE
+  peers:
+  - mtls:
+      mode: PERMISSIVE

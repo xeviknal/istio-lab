@@ -1,10 +1,9 @@
 apiVersion: "networking.istio.io/v1alpha3"
 kind: "DestinationRule"
 metadata:
-  name: "enable-mtls"
-  namespace: bookinfo
+  name: "details-enable-mtls"
 spec:
-  host: "*.bookinfo.svc.cluster.local"
+  host: details
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL

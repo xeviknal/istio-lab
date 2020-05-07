@@ -1,10 +1,8 @@
 apiVersion: "security.istio.io/v1beta1"
 kind: "PeerAuthentication"
 metadata:
-  name: "enable-mtls-details"
+  name: "default"
+  namespace: foo
 spec:
-  selector:
-    matchLabels:
-      app: details
   mtls:
     mode: STRICT
