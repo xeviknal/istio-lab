@@ -1,0 +1,20 @@
+# Invalid: Policy explicitly asks for mTLS connections but DestinationRule disables workload mtls connections
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: "disable-mtls"
+  namespace: "bookinfo"
+spec:
+  host: "*.bookinfo.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+apiVersion: "security.istio.io/v1beta1"
+kind: "PeerAuthentication"
+metadata:
+  name: "default"
+  namespace: bookinfo
+spec:
+  mtls:
+    mode: STRICT
