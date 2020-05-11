@@ -6,15 +6,16 @@ function nextstep {
 }
 
 function step {
-  echo "oc apply -f" $1
-  oc apply -f $1
+  echo "kubectl apply -f" $1
+  echo $2
+  kubectl apply -f $1
   nextstep
 }
 
-step 'meshpolicy-right.yaml'
-step 'dr-right.yaml'
-step 'dr-partial.yaml'
-step 'meshpolicy-permissive.yaml'
+step 'meshpolicy-right.yaml' 'Partially enabled on autoMTLS=false | Enabled on autoMTLS=true'
+step 'dr-right.yaml' 'Mesh-wide mTLS enabled (both autoMtls states)'
+step 'dr-partial.yaml' 'Partially enabled on autoMTLS=false | Enabled on autoMTLS=true'
+step 'meshpolicy-permissive.yaml' 'tesing'
 
 echo 'Do you want to reset mesh to mTLS?'
 read letsee

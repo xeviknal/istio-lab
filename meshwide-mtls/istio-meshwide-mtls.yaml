@@ -9,8 +9,8 @@ kind: "PeerAuthentication"
 metadata:
   name: "default"
 spec:
-  peers:
-  - mtls: {}
+  mtls:
+    mode: STRICT
 ---
 apiVersion: "networking.istio.io/v1alpha3"
 kind: "DestinationRule"
