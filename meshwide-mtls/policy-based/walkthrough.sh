@@ -6,8 +6,8 @@ function nextstep {
 }
 
 function step {
-  echo "oc apply -f" $1
-  oc apply -f $1
+  echo "kubectl apply -f" $1
+  kubectl apply -f $1
   nextstep
 }
 
