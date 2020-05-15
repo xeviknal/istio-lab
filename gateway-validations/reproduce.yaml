@@ -1,0 +1,64 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: reviews
+  namespace: bookinfo
+spec:
+  hosts:
+    - productpage
+  gateways:
+    - bookinfo-gateway.bookinfo
+  http:
+    - route:
+        - destination:
+            host: reviews
+            subset: v1
+          weight: 50
+        - destination:
+            host: reviews
+            subset: v3
+          weight: 50
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: bookinfo
+  namespace: bookinfo
+spec:
+  hosts:
+    - productpage
+  gateways:
+    - bookinfo-gateway
+  http:
+    - match:
+        - uri:
+            exact: /productpage
+        - uri:
+            prefix: /static
+        - uri:
+            exact: /login
+        - uri:
+            exact: /logout
+        - uri:
+            prefix: /api/v1/products
+      route:
+        - destination:
+            host: productpage
+            port:
+              number: 9080
+---
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: bookinfo-gateway
+  namespace: bookinfo
+spec:
+  servers:
+    - hosts:
+        - productpage.bookinfo.svc.cluster.local
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+  selector:
+    istio: ingressgateway
