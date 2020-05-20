@@ -1,0 +1,47 @@
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: details
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: details
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: details-dup
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: details
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: details-dup-2
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: details
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: details-dup-3
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: details
+  mtls:
+    mode: STRICT
