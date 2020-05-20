@@ -1,10 +1,18 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
 metadata:
-    name: details
+  name: "details-disable-mtls"
 spec:
-  host: details.bookinfo.svc.cluster.local
+  host: details
   trafficPolicy:
     tls:
-      mode: ISTIO_MUTUAL
+      mode: DISABLE
 ---
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: "default"
+spec:
+  peers:
+  - mtls:
+      mode: PERMISSIVE
