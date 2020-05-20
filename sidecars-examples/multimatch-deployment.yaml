@@ -26,3 +26,33 @@ spec:
         - default/reviews.default.svc.cluster.local
         - default/details.default.svc.cluster.local
         - istio-system/*
+---
+kind: Sidecar
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: sidecar-productpage-3
+spec:
+  workloadSelector:
+    labels:
+      app: productpage
+      version: v1
+  egress:
+    - hosts:
+        - default/reviews.default.svc.cluster.local
+        - default/details.default.svc.cluster.local
+        - istio-system/*
+---
+kind: Sidecar
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: sidecar-productpage-4
+spec:
+  workloadSelector:
+    labels:
+      app: productpage
+      version: v1
+  egress:
+    - hosts:
+        - default/reviews.default.svc.cluster.local
+        - default/details.default.svc.cluster.local
+        - istio-system/*

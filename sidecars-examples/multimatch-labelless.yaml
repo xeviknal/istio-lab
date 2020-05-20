@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Sidecar
 metadata:
   name: multimatch
-  namespace: default
+  namespace: bookinfo
 spec:
   ingress:
   - port:
@@ -25,7 +25,53 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Sidecar
 metadata:
   name: multimatch-repeat
-  namespace: default
+  namespace: bookinfo
+spec:
+  ingress:
+  - port:
+      number: 9080 # binds to proxy_instance_ip:9080 (0.0.0.0:9080, if no unicast IP is available for the instance)
+      protocol: HTTP
+      name: somename
+    defaultEndpoint: 127.0.0.1:8080
+    captureMode: NONE # not needed if metadata is set for entire proxy
+  egress:
+  - port:
+      number: 3306
+      protocol: MYSQL
+      name: egressmysql
+    captureMode: NONE # not needed if metadata is set for entire proxy
+    bind: 127.0.0.1
+    hosts:
+    - "*/mysql.foo.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Sidecar
+metadata:
+  name: multimatch-repeat-1
+  namespace: bookinfo
+spec:
+  ingress:
+  - port:
+      number: 9080 # binds to proxy_instance_ip:9080 (0.0.0.0:9080, if no unicast IP is available for the instance)
+      protocol: HTTP
+      name: somename
+    defaultEndpoint: 127.0.0.1:8080
+    captureMode: NONE # not needed if metadata is set for entire proxy
+  egress:
+  - port:
+      number: 3306
+      protocol: MYSQL
+      name: egressmysql
+    captureMode: NONE # not needed if metadata is set for entire proxy
+    bind: 127.0.0.1
+    hosts:
+    - "*/mysql.foo.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Sidecar
+metadata:
+  name: multimatch-repeat-2
+  namespace: bookinfo
 spec:
   ingress:
   - port:
