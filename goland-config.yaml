@@ -1,0 +1,46 @@
+server:
+  address: localhost
+  port: 8000
+in_cluster: false
+login_token:
+  signing_key: randomgeneratedtoken
+deployment:
+  accessible_namespaces:
+  - default
+  - istio-system
+  - foo
+  - bar
+  - legacy
+  - bookinfo
+external_services:
+  prometheus:
+    url: http://localhost:19090
+  tracing:
+    enabled: true
+    in_cluster_url: http://jaeger-query.istio-system:16686
+    url: http://localhost:16686/jaeger
+    namespace: istio-system
+    port: 443
+    service: jaeger-query
+    auth:
+      insecure_skip_verify: true
+      password: 7xyUn5hM7v1B9LYy2ojzRQJs9HAtDiUWiVGN8Yi+eGqaUYurYEDbD2ILXpwgMg/Kpfog0b6AriGPsDfOTpdhV2ocWjAKgQVKAFfZ1fFdKGSVUSxIxJhZDv43EjZN3bCZCBvqsycnCmvkLhNr+hF7RqjidQlQCAnmjKjxBfjnxSs0NkXaVQX0wJlvkhRpDHAgXWT01Onj7B7C2W0fHCIAdHAy59cAzoOb4Djq/91aNd6h9jaynBCVQ6lcYyuFXvWSU2V9ez1a7jZxh0YEVGKfVkvP01KGvwDPZOjPJX21K1bWO3NOeQfOr5ep43rI9Q2M+qOdlc1H+YCPrt4ZB/RY
+      type: basic
+      use_kiali_token: false
+      username: internal
+  grafana:
+    url: https://grafana-istio-system.apps.openshift.com
+  istio:
+    istio_identity_domain: svc.cluster.local
+    istio_sidecar_annotation: sidecar.istio.io/status
+kubernetes_config:
+  cache_enabled: false
+auth:
+  strategy: anonymous
+extensions:
+  threescale:
+    adapter_name: threescale
+    adapter_port: 3333
+    adapter_service: threescale-istio-adapter
+    enabled: true
+    template_name: threescale-authorization
