@@ -1,19 +1,4 @@
 apiVersion: networking.istio.io/v1beta1
-kind: Gateway
-metadata:
-  name: admin-gateway
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - admin.example.com
----
-apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: admin-gateway
@@ -40,21 +25,6 @@ spec:
     name: admin
 ---
 apiVersion: networking.istio.io/v1beta1
-kind: Gateway
-metadata:
-  name: user-gateway
-spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - user.example.com
----
-apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: user-gateway
@@ -79,3 +49,45 @@ spec:
   - labels:
       version: v2
     name: user
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: reviews
+spec:
+  hosts:
+    - reviews
+  http:
+    - route:
+        - destination:
+            host: reviews
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: admin-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: https-admin-gateway
+      number: 32301
+      protocol: HTTP
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: user-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: https-user-gateway
+      number: 32302
+      protocol: HTTP
