@@ -1,6 +1,21 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
+  name: admin-gateway-2
+spec:
+  gateways:
+  - admin-gateway
+  hosts:
+  - admin.example.com
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: admin
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
   name: admin-gateway
 spec:
   gateways:
@@ -27,6 +42,21 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
+  name: user-gateway-2
+spec:
+  gateways:
+  - user-gateway
+  hosts:
+  - users.example.com
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: user
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
   name: user-gateway
 spec:
   gateways:
@@ -49,6 +79,18 @@ spec:
   - labels:
       version: v2
     name: user
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: reviews-2
+spec:
+  hosts:
+    - reviews
+  http:
+    - route:
+        - destination:
+            host: reviews
 ---
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
