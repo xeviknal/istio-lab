@@ -1,0 +1,31 @@
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: bookinfo-gateway-1
+  namespace: bookinfo
+spec:
+  servers:
+    - hosts:
+        - productpage.bookinfo.svc.cluster.local
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+  selector:
+    istio: ingressgateway
+---
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: bookinfo-gateway-2
+  namespace: bookinfo
+spec:
+  servers:
+    - hosts:
+        - productpage.bookinfo
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+  selector:
+    istio: ingressgateway

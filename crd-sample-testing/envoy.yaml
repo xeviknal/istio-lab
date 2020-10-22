@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: custom-protocol
+spec:
+  configPatches:
+  - applyTo: NETWORK_FILTER
+    match:
+      context: SIDECAR_OUTBOUND # will match outbound listeners in all sidecars
+      listener:
+        portNumber: 9307
+        filterChain:
+          filter:
+            name: "envoy.tcp_proxy"
+    patch:
+      operation: INSERT_BEFORE
+      value:
+        # This is the full filter config including the name and config or typed_config section.
+        name: "envoy.config.filter.network.custom_protocol"
+  - applyTo: NETWORK_FILTER # http connection manager is a filter in Envoy
+    match:
+      # context omitted so that this applies to both sidecars and gateways
+      listener:
+        filterChain:
+          filter:
+            name: "envoy.http_connection_manager"
+    patch:
+      operation: MERGE
+      value:
+        name: "envoy.http_connection_manager"
+        typed_config:
+          "@type": "type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager"
+          common_http_protocol_options:
+            idle_timeout: 30s
