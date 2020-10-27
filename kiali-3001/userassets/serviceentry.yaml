@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: foo-dev
+  namespace: istio-system
+spec:
+  endpoints:
+  # ip is a vm/service outside the cluster
+  - address: 10.15.1.121
+  exportTo:
+  - "."
+  hosts:
+  - foo-dev.istio-system.svc.cluster.local
+  location: MESH_EXTERNAL
+  ports:
+  - name: http
+    number: 49000
+    protocol: HTTP
+  resolution: STATIC

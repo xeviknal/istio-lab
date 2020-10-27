@@ -13,3 +13,5 @@ kiali-commit-conf
 travel-comparison-demo
 istio-api
 istio.io
+kiali-demos
+prometheus-operator

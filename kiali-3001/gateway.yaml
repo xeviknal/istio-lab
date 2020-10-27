@@ -1,0 +1,15 @@
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: foobar-gateway
+  namespace: bookinfo
+spec:
+  servers:
+    - hosts:
+        - 'foo.example.com'
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+  selector:
+    istio: ingressgateway

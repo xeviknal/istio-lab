@@ -34,7 +34,7 @@ external_services:
     istio_identity_domain: svc.cluster.local
     istio_sidecar_annotation: sidecar.istio.io/status
 kubernetes_config:
-  cache_enabled: false
+  cache_enabled: true
 auth:
   strategy: anonymous
 extensions:

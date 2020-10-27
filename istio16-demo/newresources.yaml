@@ -1,0 +1,50 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: WorkloadEntry
+metadata:
+  name: details-svc
+  namespace: bookinfo
+spec:
+  # use of the service account indicates that the workload has a
+  # sidecar proxy bootstrapped with this service account. Pods with
+  # sidecars will automatically communicate with the workload using
+  # istio mutual TLS.
+  serviceAccount: details-legacy
+  address: 2.2.2.2
+  labels:
+    app: details-legacy
+    instance-id: vm1
+  # ports if not specified will be the same as service ports
+---
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: httpbin
+  namespace: foo
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  jwtRules:
+  - issuer: "issuer-foo"
+  - issuer: "issuer-bar"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: httpbin
+  namespace: foo
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+ rules:
+ - from:
+   - source:
+       requestPrincipals: ["issuer-foo/*"]
+   to:
+     hosts: ["example.com"]
+ - from:
+   - source:
+       requestPrincipals: ["issuer-bar/*"]
+   to:
+     hosts: ["another-host.com"]

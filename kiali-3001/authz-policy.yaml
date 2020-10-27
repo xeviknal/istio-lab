@@ -1,0 +1,17 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: policy
+ namespace: istio-system
+spec:
+ action: ALLOW
+ selector:
+   matchLabels:
+     app: istio-ingressgateway
+ rules:
+ - from:
+   - source:
+       principals: ["admin"]
+   to:
+   - operation:
+       hosts: ["foo.example.com"]
