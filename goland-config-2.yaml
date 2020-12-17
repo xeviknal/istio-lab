@@ -8,6 +8,9 @@ deployment:
   accessible_namespaces:
   - default
   - istio-system
+  - foo
+  - bar
+  - legacy
   - bookinfo
 external_services:
   prometheus:
@@ -18,7 +21,7 @@ external_services:
     url: http://localhost:16686/jaeger
     namespace: istio-system
     port: 443
-    service: jaeger-query
+    service : jaeger-query
     auth:
       insecure_skip_verify: true
       password: 7xyUn5hM7v1B9LYy2ojzRQJs9HAtDiUWiVGN8Yi+eGqaUYurYEDbD2ILXpwgMg/Kpfog0b6AriGPsDfOTpdhV2ocWjAKgQVKAFfZ1fFdKGSVUSxIxJhZDv43EjZN3bCZCBvqsycnCmvkLhNr+hF7RqjidQlQCAnmjKjxBfjnxSs0NkXaVQX0wJlvkhRpDHAgXWT01Onj7B7C2W0fHCIAdHAy59cAzoOb4Djq/91aNd6h9jaynBCVQ6lcYyuFXvWSU2V9ez1a7jZxh0YEVGKfVkvP01KGvwDPZOjPJX21K1bWO3NOeQfOr5ep43rI9Q2M+qOdlc1H+YCPrt4ZB/RY
@@ -26,12 +29,40 @@ external_services:
       use_kiali_token: false
       username: internal
   grafana:
-    url: https://grafana-istio-system.apps.openshift.com
+    url: https://grafana-istio-system.apps.xcanalma.devcluster.openshift.com
   istio:
     istio_identity_domain: svc.cluster.local
     istio_sidecar_annotation: sidecar.istio.io/status
+    istio_status:
+      enabled: true
+      warning:
+        - istio-egressgateway:
+            deployment: istio-egressgateway
+            namespace: istio-system
+        - tracing:
+            deployment: jaeger
+            namespace: tracing-ns
+        - grafana: grafana
+            deployment: grafana
+            namespace: istio-system
+      error:
+        - pilot:
+            deployment: istiod
+            namespace: istio-system
+        - istio-ingressgateway:
+            deployment: istio-ingressgateway
+            namespace: istio-system
+        - prometheus:
+            deployment: prometheus
+            namespace: prom-ns
 kubernetes_config:
-  cache_enabled: true
+  cache_enabled: false
+istio_component_namespaces:
+  grafana: istio-system
+  istiod: istio-system
+  pilot: istio-system
+  prometheus: istio-system
+  tracing: istio-system
 auth:
   strategy: anonymous
 extensions:

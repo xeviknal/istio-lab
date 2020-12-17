@@ -1,0 +1,204 @@
+additional_display_details:
+- annotation: kiali.io/api-spec
+  icon_annotation: kiali.io/api-type
+  title: API Documentation
+api:
+  namespaces:
+    exclude:
+    - istio-operator
+    - kube.*
+    - openshift.*
+    - ibm.*
+    - kiali-operator
+auth:
+  openid:
+    api_proxy: ''
+    api_proxy_ca_data: ''
+    authentication_timeout: 300
+    authorization_endpoint: ''
+    client_id: ''
+    disable_rbac: false
+    http_proxy: ''
+    https_proxy: ''
+    insecure_skip_verify_tls: false
+    issuer_uri: ''
+    scopes:
+    - openid
+    - profile
+    - email
+    username_claim: sub
+  openshift:
+    client_id_prefix: kiali
+  strategy: anonymous
+deployment:
+  accessible_namespaces:
+  - '**'
+  affinity:
+    node: {}
+    pod: {}
+    pod_anti: {}
+  custom_dashboards:
+    excludes:
+    - ''
+    includes:
+    - '*'
+  image_name: quay.io/kiali/kiali
+  image_pull_policy: IfNotPresent
+  image_pull_secrets: []
+  image_version: v1.28.0
+  ingress_enabled: true
+  logger:
+    log_format: text
+    log_level: info
+    sampler_rate: '1'
+    time_field_format: 2006-01-02T15:04:05Z07:00
+  namespace: kiali-operator
+  node_selector: {}
+  pod_annotations: {}
+  pod_labels: {}
+  priority_class_name: ''
+  replicas: 1
+  resources: {}
+  secret_name: kiali
+  service_annotations: {}
+  tolerations: []
+  version_label: v1.28.0
+  view_only_mode: false
+extensions:
+  iter_8:
+    enabled: false
+external_services:
+  custom_dashboards:
+    enabled: true
+    is_core_component: false
+    namespace_label: ''
+    prometheus:
+      auth:
+        ca_file: ''
+        insecure_skip_verify: false
+        password: ''
+        token: ''
+        type: none
+        use_kiali_token: false
+        username: ''
+      url: 'http://prometheus.istio-system:9090'
+  grafana:
+    auth:
+      ca_file: ''
+      insecure_skip_verify: false
+      password: ''
+      token: ''
+      type: none
+      use_kiali_token: false
+      username: ''
+    dashboards:
+    - name: Istio Service Dashboard
+      variables:
+        namespace: var-namespace
+        service: var-service
+    - name: Istio Workload Dashboard
+      variables:
+        namespace: var-namespace
+        workload: var-workload
+    enabled: true
+    in_cluster_url: http://grafana.kiali-operator:3000
+    is_core_component: false
+    url: ''
+  istio:
+    component_status:
+      components:
+      - app_label: istiod
+        is_core: true
+        namespace: ''
+      - app_label: istio-ingressgateway
+        is_core: true
+        namespace: ''
+      - app_label: istio-egressgateway
+        is_core: false
+        namespace: ''
+      enabled: true
+    config_map_name: istio
+    envoy_admin_local_port: 15000
+    istio_identity_domain: svc.cluster.local
+    istio_injection_annotation: sidecar.istio.io/inject
+    istio_sidecar_annotation: sidecar.istio.io/status
+    url_service_version: http://istiod.kiali-operator:15014/version
+  istio_namespace: istio-system
+  prometheus:
+    auth:
+      ca_file: ''
+      insecure_skip_verify: false
+      password: ''
+      token: ''
+      type: none
+      use_kiali_token: false
+      username: ''
+    cache_duration: 7
+    cache_enabled: true
+    cache_expiration: 300
+    url: http://prometheus.kiali-operator:9090
+  tracing:
+    auth:
+      ca_file: ''
+      insecure_skip_verify: false
+      password: ''
+      token: ''
+      type: none
+      use_kiali_token: false
+      username: ''
+    enabled: true
+    in_cluster_url: http://tracing.kiali-operator/jaeger
+    is_core_component: false
+    namespace_selector: true
+    url: ''
+    whitelist_istio_system:
+    - jaeger-query
+    - istio-ingressgateway
+health_config:
+  rate: []
+identity:
+  cert_file: ''
+  private_key_file: ''
+installation_tag: ''
+istio_component_namespaces:
+  grafana: kiali-operator
+  istiod: kiali-operator
+  prometheus: kiali-operator
+  tracing: kiali-operator
+istio_labels:
+  app_label_name: app
+  injection_label_name: istio-injection
+  version_label_name: version
+istio_namespace: kiali-operator
+kiali_feature_flags:
+  istio_injection_action: true
+kubernetes_config:
+  burst: 200
+  cache_duration: 300
+  cache_enabled: true
+  cache_istio_types:
+  - DestinationRule
+  - Gateway
+  - ServiceEntry
+  - VirtualService
+  - Sidecar
+  - PeerAuthentication
+  - RequestAuthentication
+  - AuthorizationPolicy
+  cache_namespaces:
+  - .*
+  cache_token_namespace_duration: 10
+  excluded_workloads:
+  - CronJob
+  - DeploymentConfig
+  - Job
+  - ReplicationController
+  qps: 175
+login_token:
+  expiration_seconds: 86400
+  signing_key: secret:kiali-signing-key:key
+server:
+  address: 'localhost'
+  port: 8000
+version: default
+in_cluster: false

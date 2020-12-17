@@ -1,0 +1,16 @@
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  auth:
+    strategy: anonymous
+  deployment:
+    accessible_namespaces:
+    - '**'
+    namespace: kiali-operator
+  external_services:
+    istio_namespace: istio-system
+    prometheus:
+      url: http://prometheus.istio-system:9090
