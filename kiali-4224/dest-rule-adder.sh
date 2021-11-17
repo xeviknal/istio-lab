@@ -8,8 +8,8 @@ do
   kubectl create ns $ns
 
   # Create a new PeerAuthn per namespace
-  echo 'Adding Peer Authentication'
-  kubectl apply -f ./peer-authentication-template.yaml -n $ns
+  # echo 'Adding Peer Authentication'
+  # kubectl apply -f ./peer-authentication-template.yaml -n $ns
 
   # Create 100 destination rule per namespace
   cp destination-rule-template.yaml destination-rule-template.temp.yaml
