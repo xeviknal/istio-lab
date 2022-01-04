@@ -9,6 +9,9 @@ spec:
   ports:
   - port: 9080
     name: wrong-http
+  - port: 9081
+    name: wrong-database
+    appProtocol: mysql
   selector:
     app: ratings-java
     version: v1

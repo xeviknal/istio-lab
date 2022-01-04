@@ -8,13 +8,17 @@ kind: ServiceAccount
 metadata:
   name: facebook-stalker-sa
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: google-stalker
 spec:
   serviceAccountName: google-stalker-sa
   replicas: 1
+  selector:
+    matchLabels:
+      app: google-stalker
+      version: v1
   template:
     metadata:
       annotations:
@@ -33,13 +37,17 @@ spec:
         - name: STALKING_WHO
           value: "https://www.google.com"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: facebook-stalker
 spec:
   serviceAccountName: facebook-stalker-sa
   replicas: 1
+  selector:
+    matchLabels:
+      app: facebook-stalker
+      version: v1
   template:
     metadata:
       annotations:

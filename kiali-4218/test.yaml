@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: bookinfo-ratings
+spec:
+  host: ratings.bookinfo.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+  subsets:
+  - name: testversion
+    labels:
+      version: v3
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: ratings-route
+spec:
+  hosts:
+  - ratings.bookinfo.svc.cluster.local
+  http:
+  - name: "ratings-v2-routes"
+    match:
+    - uri:
+        prefix: "/wpcatalog"
+    - uri:
+        prefix: "/consumercatalog"
+    rewrite:
+      uri: "/newcatalog"
+    route:
+    - destination:
+        host: ratings.bookinfo.svc.cluster.local
+        subset: v2
+  - name: "ratings-v3-route"
+    route:
+    - destination:
+        host: ratings.bookinfo.svc.cluster.local
+        subset: v3
